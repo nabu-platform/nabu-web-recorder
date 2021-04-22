@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<node artifactManager="be.nabu.eai.module.rest.provider.RESTServiceManager" created="2021-04-21T09:44:08.814+02:00" lastModified="2021-04-21T09:49:41.386+02:00" leaf="true" version="10">
+    <environmentId>apollo</environmentId>
+    <hidden>false</hidden>
+    <properties/>
+    <references>nabu.web.recorder.manage.rest.session.sessionList</references>
+    <references>java.lang.Long</references>
+    <references>java.lang.String</references>
+    <references>nabu.frameworks.events.manage.crud.event.services.list</references>
+</node>

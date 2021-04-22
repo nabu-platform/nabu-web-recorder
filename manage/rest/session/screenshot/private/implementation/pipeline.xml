@@ -1,0 +1,5 @@
+<structure interface="$self:api" name="pipeline">
+    <structure name="input"/>
+    <structure name="output"/>
+    <structure collectionName="events" definition="nabu.frameworks.events.manage.crud.event.types.output" name="event"/>
+</structure>

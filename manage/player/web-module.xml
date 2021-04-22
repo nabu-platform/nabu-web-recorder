@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<webModule>
+    <webFragments>nabu.web.recorder.manage.rest.session.list</webFragments>
+    <webFragments>nabu.web.recorder.manage.rest.session.event.list</webFragments>
+    <webFragments>nabu.web.recorder.manage.rest.session.screenshot</webFragments>
+</webModule>

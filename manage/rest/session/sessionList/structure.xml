@@ -1,0 +1,4 @@
+<structure name="sessionList">
+    <structure definition="nabu.web.recorder.manage.rest.session.session" maxOccurs="unbounded" minOccurs="0" name="sessions"/>
+    <structure definition="be.nabu.eai.module.services.crud.Page" minOccurs="0" name="page"/>
+</structure>

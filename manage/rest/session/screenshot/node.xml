@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<node artifactManager="be.nabu.eai.module.rest.provider.RESTServiceManager" created="2021-04-22T10:07:49.545+02:00" lastModified="2021-04-22T10:23:27.628+02:00" leaf="true" version="9">
+    <environmentId>apollo</environmentId>
+    <hidden>false</hidden>
+    <properties/>
+    <references>nabu.frameworks.events.manage.crud.event.types.output</references>
+    <references>java.lang.Long</references>
+    <references>nabu.frameworks.events.manage.crud.event.services.get</references>
+    <references>java.lang.String</references>
+    <references>java.util.UUID</references>
+    <references>nabu.web.recorder.manage.rest.session.getHtml</references>
+    <references>java.io.InputStream</references>
+</node>

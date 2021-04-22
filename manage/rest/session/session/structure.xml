@@ -1,0 +1,10 @@
+<structure name="session">
+    <field name="created" type="java.util.Date"/>
+    <field name="alias" type="java.lang.String"/>
+    <field name="realm" type="java.lang.String"/>
+    <field name="sessionId" type="java.lang.String"/>
+    <field minOccurs="0" name="serverGroup" type="java.lang.String"/>
+    <field minOccurs="0" name="artifactId" type="java.lang.String"/>
+    <field minOccurs="0" name="sourceIp" type="java.lang.String"/>
+    <field identifiable="true" minOccurs="0" name="sourceHost" type="java.lang.String"/>
+</structure>

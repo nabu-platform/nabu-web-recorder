@@ -1,0 +1,3 @@
+<structure name="path">
+    <field name="sessionId" type="java.lang.String"/>
+</structure>

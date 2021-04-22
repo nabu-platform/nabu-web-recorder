@@ -1,0 +1,7 @@
+@path {sessionId}/{eventId}
+
+@path
+sessionId ?= null
+
+@path
+eventId ?= null

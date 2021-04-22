@@ -1,0 +1,82 @@
+<sequence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		disabled="false"
+		id="83e388f2-0899-4829-bbf7-aa60d7f1fc76">
+	<steps xsi:type="be.nabu.libs.services.vm.step.Map"
+			disabled="false"
+			id="a81388f8-0149-4942-a2b3-b888c2df969f">
+		<steps xsi:type="be.nabu.libs.services.vm.step.Invoke"
+				disabled="false"
+				id="db82930c-9eb5-4b5b-bc04-00ee6bc41442"
+				serviceId="nabu.frameworks.events.manage.crud.event.services.get"
+				resultName="result0ceadc3901564e1eab656920d906ba77"
+				temporaryMapping="true"
+				x="93"
+				y="49"
+				invocationOrder="0"
+				asynchronous="false"
+				recache="false">
+			<steps xsi:type="be.nabu.libs.services.vm.step.Link"
+					disabled="false"
+					id="e80dd461-75c9-4412-8f37-9453e129d879"
+					mask="false"
+					optional="false"
+					fixedValue="false">
+				<from>input/path/eventId</from>
+				<to>id</to>
+			</steps>
+		</steps>
+		<steps xsi:type="be.nabu.libs.services.vm.step.Link"
+				disabled="false"
+				id="638bb853-e22b-4eb7-bd77-abf15ae9248d"
+				mask="false"
+				optional="false"
+				fixedValue="false">
+			<from>result0ceadc3901564e1eab656920d906ba77/result</from>
+			<to>event</to>
+		</steps>
+	</steps>
+	<steps xsi:type="be.nabu.libs.services.vm.step.Map"
+			disabled="false"
+			id="43a3404d-6184-4819-9039-1a556e9b3b6a"
+			label="event/eventName == &quot;screenshot&quot; &amp;&amp; event/sessionId == input/path/sessionId">
+		<steps xsi:type="be.nabu.libs.services.vm.step.Invoke"
+				disabled="false"
+				id="31f71680-6b17-4ce9-ad85-3e74c9fba8f1"
+				serviceId="nabu.web.recorder.manage.rest.session.getHtml"
+				resultName="resulte9d0b238280a4ee5bb8f28b646048760"
+				temporaryMapping="true"
+				x="164"
+				y="32"
+				invocationOrder="0"
+				asynchronous="false"
+				recache="false">
+			<steps xsi:type="be.nabu.libs.services.vm.step.Link"
+					disabled="false"
+					id="d375ec43-0d64-4605-89c0-39e6de833e6e"
+					mask="false"
+					optional="false"
+					fixedValue="false">
+				<from>event/additional</from>
+				<to>additional</to>
+			</steps>
+		</steps>
+		<steps xsi:type="be.nabu.libs.services.vm.step.Link"
+				disabled="false"
+				id="a4e8f247-a702-4d80-91c3-320d50379672"
+				mask="false"
+				optional="false"
+				fixedValue="false">
+			<from>resulte9d0b238280a4ee5bb8f28b646048760/html</from>
+			<to>output/content</to>
+		</steps>
+		<steps xsi:type="be.nabu.libs.services.vm.step.Link"
+				disabled="false"
+				id="0f8cb3c2-3b29-4a83-b890-1f269b524b05"
+				mask="false"
+				optional="false"
+				fixedValue="true">
+			<from>text/html</from>
+			<to>output/meta/contentType</to>
+		</steps>
+	</steps>
+</sequence>

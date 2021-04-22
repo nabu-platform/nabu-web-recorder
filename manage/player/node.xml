@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<node artifactManager="be.nabu.eai.module.web.component.WebComponentManager" created="2021-04-21T09:39:57.997+02:00" lastModified="2021-04-22T10:18:16.068+02:00" leaf="true" version="4">
+    <environmentId>apollo</environmentId>
+    <hidden>false</hidden>
+    <properties/>
+    <references>nabu.web.recorder.manage.rest.session.list</references>
+    <references>nabu.web.recorder.manage.rest.session.event.list</references>
+    <references>nabu.web.recorder.manage.rest.session.screenshot</references>
+</node>

@@ -1,0 +1,6 @@
+string additional ?= null
+object = json.objectify(additional)
+if (object/content != null)
+	content = json.objectify(object/content)
+	@return
+	string html = content/html
