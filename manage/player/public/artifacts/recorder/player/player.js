@@ -218,7 +218,6 @@ Vue.view("event-player", {
 			this.currentHash = null;
 			this.playOffset = offset;
 			var active = !offset ? this.story[0] : this.getStoryAt(offset);
-			console.log("story at offset", offset, active, this.story);
 			if (active) {
 				this.playing = true;
 				this.playStoryItem(active);
@@ -297,6 +296,12 @@ Vue.view("event-player", {
 						self.iframeWindow.document.body.removeChild(img);
 					}, 500);
 				}
+				else if (storyItem.type == "type") {
+					if (storyItem.target) {
+						var element = this.findElement(storyItem.target);
+						element.value = storyItem.content.value;
+					}
+				}
 				// we want to play the next story item
 				var index = this.story.indexOf(storyItem);
 				if (index < this.story.length - 1) {
@@ -308,6 +313,17 @@ Vue.view("event-player", {
 					// jump back to beginning if we hit play again
 					this.playOffset = 0;
 				}
+			}
+		},
+		findElement: function(target) {
+			if (target.indexOf("#") == 0) {
+				return this.iframeWindow.document.getElementById(target.substring(1));
+			}
+			else if (target.indexOf("@") == 0) {
+				return this.iframeWindow.document.querySelector("[name=\"" + target.substring(1) + "\"]");
+			}
+			else {
+				return this.iframeWindow.document.evaluate(target);
 			}
 		},
 		loadHash: function(newValue, handler) {

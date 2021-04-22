@@ -352,7 +352,7 @@ window.addEventListener("unload", function(event) {
 }, true);
 
 window.addEventListener("mousemove", function(event) {
-	if (application.services && application.services.recorder) {
+	if (application.services && application.services.recorder && event.pageX != null && event.pageY != null) {
 		application.services.recorder.mouseX = event.pageX;
 		application.services.recorder.mouseY = event.pageY;
 		application.services.recorder.fire("move", null, {x: event.pageX, y: event.pageY});
