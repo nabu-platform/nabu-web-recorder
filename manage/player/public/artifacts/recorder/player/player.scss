@@ -1,8 +1,96 @@
 .event-player {
+	.current-playing {
+		border: solid 1px #ccc;
+		background-color: #eaeaea;
+		padding: 0.3rem;
+	}
+	.active-event, .metadata {
+		margin: 0.7rem 0;
+	}
 	position: relative;
 	.player-information {
-		position: absolute;
-		bottom: 0;
-		right: 0;
+		margin: 1rem 0;
+	}
+	.meta {
+		margin: 0.3rem 0;
+		.key {
+			&:after {
+				content: ': ';
+			}
+			color: #aaa;
+			font-weight: bold;
+		}
+		.value {
+			color: #333;
+		}
+	}
+	.player {
+		display: inline-block;
+		padding: 0.7rem;
+		background-color: #eaeaea;
+		border: solid 1px #ccc;
+		input {
+			vertical-align: middle;
+		}
+		button {
+			border: solid 1px #ccc;
+			background-color: white;
+			margin-left: 0.3rem;
+		}
+	}
+	.event-player-single {
+		position: relative;
+		.event-duration {
+			display: inline-block;
+			padding: 0.1rem 0.7rem;
+			color: #333;
+			background-color: #ccc;
+			border-radius: 5px;
+			font-size: 0.8rem;
+		}
+		> * {
+			&:not(:first-child) {
+				margin-left: 0.7rem;
+			}
+		}
+		padding: 0.3rem;
+		border: solid 1px #ccc;
+		.event-icon {
+			img {
+				width: 16px;
+				display:inline-block;
+				vertical-align: middle;
+			}
+		}
+		+.event-player-single {
+			margin-top: 0.1rem;
+		}
+		
+		.event-category {
+			font-size: 0.8rem;
+			color: #666;
+		}
+		.event-name {
+			color: #333;
+			font-weight: bold;
+		}
+		.event-code {
+			padding: 0.3rem 0.7rem;
+			font-size: 0.6rem;
+			text-transform: uppercase;
+			color: white;
+			background-color: #888;
+			border-radius: 5px;
+			border: solid 1px #333;
+		}
+		.event-method {
+			padding: 0.3rem 0.7rem;
+			font-size: 0.6rem;
+			text-transform: uppercase;
+			color: white;
+			background-color: #333;
+			border-radius: 5px;
+			border: solid 1px #000;
+		}
 	}
 }

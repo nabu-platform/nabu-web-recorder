@@ -1,3 +1,13 @@
+Vue.component("event-player-single", {
+	template: "#event-player-single",
+	props: {
+		event: {
+			type: Object,
+			required: true
+		}
+	}
+});
+
 Vue.view("event-player", {
 	props: {
 		sessionId: {
@@ -11,12 +21,14 @@ Vue.view("event-player", {
 		return {
 			// all the events (backend format)
 			events: [],
+			regularEvents: [],
 			// all the events related to the recorder (backend format)
 			recordingEvents: [],
 			// all the frontend events
 			story: [],
 			// any active events currently in the window
 			activeEvents: [],
+			selectedEvent: null,
 			// where are you in the playback right now? offset is in ms
 			// maybe we can pass this in as a parameter as well? you can send links like youtube -> at a certain time in the session
 			playOffset: 0,
@@ -40,6 +52,48 @@ Vue.view("event-player", {
 			heatmap: null
 		}
 	},
+	computed: {
+		userAgent: function() {
+			var event = this.events.filter(function(x) {
+				return x.userAgent != null;
+			})[0];
+			return event ? event.userAgent : null;
+		},
+		alias: function() {
+			var event = this.events.filter(function(x) {
+				return x.alias != null;
+			})[0];
+			return event ? event.alias : null;
+		},
+		eventsBefore: function() {
+			var active = this.playOffset == 0 ? this.story[0] : this.getStoryAt(this.playOffset);
+			if (!active && this.story.length) {
+				active = this.story[this.story.length - 1];
+			}
+			// if our playoffset is 0, we want pretty much all the events before it
+			// otherwise, our current window is 3 seconds
+			var window = this.playOffset == 0 ? 60000 : 2000;
+			var events = !active ? [] : this.regularEvents.filter(function(x) { return x.created.getTime() <= active.created.getTime() && x.created.getTime() >= active.created.getTime() - window });
+			events.forEach(function(x) {
+				x.offset = active.created.getTime() - x.created.getTime();
+			});
+			return events;
+		},
+		eventsAfter: function() {
+			var active = this.playOffset == 0 ? this.story[0] : this.getStoryAt(this.playOffset);
+			if (!active && this.story.length) {
+				active = this.story[this.story.length - 1];
+			}
+			// if our playoffset is 0, we want pretty much all the events before it
+			// otherwise, our current window is 3 seconds
+			var window = 2000;
+			var events = !active ? [] : this.regularEvents.filter(function(x) { return x.created.getTime() >= active.created.getTime() && x.created.getTime() <= active.created.getTime() + window });
+			events.forEach(function(x) {
+				x.offset = active.created.getTime() - x.created.getTime();
+			});
+			return events;
+		}
+	},
 	activate: function(done) {
 		var self = this;
 		// load the events of this session
@@ -61,10 +115,12 @@ Vue.view("event-player", {
 			var self = this;
 			this.story.splice(0);
 			this.recordingEvents.splice(0);
+			this.regularEvents.splice(0);
 			// reset screenshots
 			Vue.set(this, "screenshots", {});
 			if (this.events.length) {
 				nabu.utils.arrays.merge(this.recordingEvents, this.events.filter(function(x) { return x.eventCategory == "record" }));
+				nabu.utils.arrays.merge(this.regularEvents, this.events.filter(function(x) { return x.eventCategory != "record" }));
 				if (this.recordingEvents.length > 0) {
 					// we create  hash map of all the available screenshots
 					this.recordingEvents.filter(function(x) { return x.eventName == "screenshot" }).forEach(function(x) {
@@ -125,7 +181,7 @@ Vue.view("event-player", {
 					// we presumably immediately send a screenshot...
 					this.loadTime = this.recordingEvents[0].created.getTime() - this.events[0].created.getTime();
 					
-					console.log("analyzed", this.duration, this.events, this.story);
+					//console.log("analyzed", this.duration, this.events, this.story);
 				}
 			}
 		},
@@ -141,17 +197,28 @@ Vue.view("event-player", {
 		},
 		// skip to a particular offset
 		skipTo: function(value) {
-			this.play(value);
+			// if already playing, restart somewhere
+			if (this.playing) {
+				this.play(parseInt(value));
+			}
+			else {
+				// otherwise, we just manipulate the play offset for when you resume
+				this.playOffset = parseInt(value);
+			}
 		},
 		resume: function() {
 			this.play(this.playOffset);	
 		},
 		// play from a specific offset, assumed to be in time (not an index)
 		play: function(offset) {
+			if (this.playing) {
+				this.pause();
+			}
 			// reset the screenshot
 			this.currentHash = null;
 			this.playOffset = offset;
 			var active = !offset ? this.story[0] : this.getStoryAt(offset);
+			console.log("story at offset", offset, active, this.story);
 			if (active) {
 				this.playing = true;
 				this.playStoryItem(active);
@@ -177,7 +244,6 @@ Vue.view("event-player", {
 					var tillNextSecond = 1000 - (this.playTimer % 1000);
 					// sleep for max 1 second, we want to move 
 					var sleep = Math.min(tillNextSecond, diff);
-					console.log("sleep is", tillNextSecond, sleep);
 					this.playTimer = setTimeout(function() {
 						self.playOffset += sleep;
 						// might sleep again!
@@ -231,7 +297,6 @@ Vue.view("event-player", {
 						self.iframeWindow.document.body.removeChild(img);
 					}, 500);
 				}
-				console.log("playing item", storyItem);
 				// we want to play the next story item
 				var index = this.story.indexOf(storyItem);
 				if (index < this.story.length - 1) {
@@ -272,7 +337,6 @@ Vue.view("event-player", {
 			var iframe = this.$refs.iframe;
 			// set a handler (or unset it if left empty)
 			this.$refs.iframe.onload = function() {
-				console.log("iframe loaded");
 				
 				self.iframeWindow = iframe.contentWindow;
 				// need to create a new cursor
@@ -355,6 +419,13 @@ Vue.view("event-player", {
 				}
 			}
 			return this.cursor;
-		},
+		}
+	},
+	watch: {
+		playing: function(newValue) {
+			if (newValue) {
+				this.selectedEvent = null;
+			}
+		}
 	}
 });
