@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>nabu.web</groupId>
+	<artifactId>recorder</artifactId>
+	<version>${nabu.web-recorder-version}</version>
+	<name>recorder</name>
+	
+	<parent>
+		<groupId>be.nabu</groupId>
+		<artifactId>modules</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>nabu.web</groupId>
+			<artifactId>component</artifactId>
+		</dependency>
+	</dependencies>
+</project>
