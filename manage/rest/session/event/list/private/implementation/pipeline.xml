@@ -1,4 +1,4 @@
-<structure interface="$self:api" name="pipeline">
+<structure interface="nabu.web.recorder.manage.rest.session.event.list:api" name="pipeline">
     <structure name="input"/>
     <structure name="output"/>
 </structure>

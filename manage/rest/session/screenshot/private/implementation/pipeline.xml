@@ -1,5 +1,5 @@
-<structure interface="$self:api" name="pipeline">
+<structure interface="nabu.web.recorder.manage.rest.session.screenshot:api" name="pipeline">
     <structure name="input"/>
     <structure name="output"/>
-    <structure collectionName="events" definition="nabu.frameworks.events.manage.crud.event.types.output" name="event"/>
+    <structure collectionName="events" definition="nabu.frameworks.events.crud.event.types.output" enricher="nabu.frameworks.events.manage.crud.event.services.list" name="event" persister="nabu.frameworks.events.manage.crud.event.batch.updateAll"/>
 </structure>

@@ -1,13 +1,15 @@
 <sequence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		disabled="false"
-		id="83e388f2-0899-4829-bbf7-aa60d7f1fc76">
+		id="83e388f2-0899-4829-bbf7-aa60d7f1fc76"
+		lineNumber="1">
 	<steps xsi:type="be.nabu.libs.services.vm.step.Map"
 			disabled="false"
-			id="a81388f8-0149-4942-a2b3-b888c2df969f">
+			id="a81388f8-0149-4942-a2b3-b888c2df969f"
+			lineNumber="2">
 		<steps xsi:type="be.nabu.libs.services.vm.step.Invoke"
 				disabled="false"
 				id="db82930c-9eb5-4b5b-bc04-00ee6bc41442"
-				serviceId="nabu.frameworks.events.manage.crud.event.services.get"
+				serviceId="nabu.frameworks.events.crud.event.services.get"
 				resultName="result0ceadc3901564e1eab656920d906ba77"
 				temporaryMapping="true"
 				x="93"
@@ -38,7 +40,8 @@
 	<steps xsi:type="be.nabu.libs.services.vm.step.Map"
 			disabled="false"
 			id="43a3404d-6184-4819-9039-1a556e9b3b6a"
-			label="event/eventName == &quot;screenshot&quot; &amp;&amp; event/sessionId == input/path/sessionId">
+			label="event/eventName == &quot;screenshot&quot; &amp;&amp; event/sessionId == input/path/sessionId"
+			lineNumber="3">
 		<steps xsi:type="be.nabu.libs.services.vm.step.Invoke"
 				disabled="false"
 				id="31f71680-6b17-4ce9-ad85-3e74c9fba8f1"

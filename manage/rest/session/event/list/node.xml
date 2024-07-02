@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<node artifactManager="be.nabu.eai.module.rest.provider.RESTServiceManager" created="2021-04-21T10:51:23.143+02:00" lastModified="2021-04-21T10:54:03.938+02:00" leaf="true" version="6">
+<node artifactManager="be.nabu.eai.module.rest.provider.RESTServiceManager" created="2021-04-21T10:51:23.143+02:00" lastModified="2024-05-02T14:43:46.716+02:00" leaf="true" version="8">
     <environmentId>apollo</environmentId>
     <hidden>false</hidden>
+    <locked>false</locked>
     <properties/>
-    <references>java.lang.String</references>
-    <references>nabu.frameworks.events.manage.crud.event.types.outputList</references>
-    <references>nabu.frameworks.events.manage.crud.event.services.list</references>
+    <references>nabu.frameworks.events.crud.event.types.outputList</references>
+    <references>nabu.frameworks.events.crud.event.services.list</references>
 </node>
